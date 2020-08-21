@@ -196,15 +196,18 @@ def process_row(fields: list, fake: Faker) -> tuple:
             row += (fld_faker.user_name(), )
 
         # date_time provider
-        if fld_type == 'date':
+        if fld_type in ('date', 'time', 'date_time'):
+            pattern = field['pattern'] if 'pattern' in field else None
             start, end = getStartEnd(field)
-            row += (fld_faker.date_between(start, end), )
-        if fld_type == 'time':
-            start, end = getStartEnd(field)
-            row += (fld_faker.time_between(start, end), )
-        if fld_type == 'date_time':
-            start, end = getStartEnd(field)
-            row += (fld_faker.date_time_between(start, end), )
+            if fld_type == 'date':
+                d = fld_faker.date_between(start, end)
+            if fld_type == 'time':
+                d = fld_faker.time_between(start, end)
+            if fld_type == 'date_time':
+                d = fld_faker.date_time_between(start, end)
+            if pattern:
+                d = d.strftime(pattern)
+            row += (d, )
         if fld_type == 'unix_time':
             start, end = getStartEnd(field)
             row += (fld_faker.unix_time(end, start), )

@@ -27,7 +27,8 @@ fields:
       type: date_time
       start: -1y
       end: now  # or "today" for date types
-      #pattern: %Y-%m-%d
+      #pattern: "%Y-%m-%d"
+      pattern: "%a, %d %b %Y %H:%M:%S %z"
     - name: creditcardnumber
       #name: ccn # omit name -> "col_n"
       type: ccn

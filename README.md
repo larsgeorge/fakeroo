@@ -1,6 +1,9 @@
 # Fakeroo
 
 This repo contains a simple Python script that can be used to generate test data.
+It is based on the [Faker](https://faker.readthedocs.io/en/stable/index.html) Python library, but extends it to generate not on CSV/DSV files, but also other ones. 
+In addition, it can correlate fields in a row, so that they *match* better.
+For instance, the geo location follows the country code within a row.
 
 ## Usage
 
