@@ -1,0 +1,50 @@
+---
+#filename: test.cvs
+format: cvs
+header: True
+field_delimiter: "|"
+
+
+#locale: de_DE                          # single locale
+locale: [ it_IT, de_DE ]              # list of locales
+#locale: { it_IT: 2, de_DE: 1 }        # weighted locales
+rows: 10
+
+fields:
+    - name: name
+      type: full_name
+      #locale: en_GB # override locale for a column
+    - name: phone
+      type: phone_number
+    - name: email
+      type: email_address
+      #domain: example.com  # fix domain part
+      domains: company      # or "safe", "free", if unset uses "company" and "free" randomly
+      format: ascii         # or unicode if unset
+    - name: userid
+      type: user_name
+    - name: lastlogin
+      type: date_time
+      start: -1y
+      end: now  # or "today" for date types
+      #pattern: %Y-%m-%d
+    - name: creditcardnumber
+      #name: ccn # omit name -> "col_n"
+      type: ccn
+      issuer: amex
+      #issuer: [ amex, visa16, mastercard ]
+      #issuer: { amex: 5, visa16: 2, mastercard: 1 ]
+    - name: location
+      type: latlong
+    - name: ipv4_address
+      #class: a  # or "b", "c"
+      #network: True  # adds network address part
+      #scope: public  # or "private", if unset uses both
+    - name: ipv6_address
+      #network: True  # adds network address part
+    
+# Example: marketing.user_account_data
+# name, phone, email, userid, lastlogin, creditcardnumber, location, ipv4_address, ipv6_address
+# Warren Reyes, 1-622-369-1888, auctor.odio@amet.ca, 279185A8-9654-7F26-4370-D75390F6DDC8, 
+#   Sat, 14 Apr 2018 15:44:42 -0700, 5270 4267 6450 5516, -12.63919, -170.65658, 185.247.200.252, 
+#   d646:af6:16d9:5a46:72c0:9a90:d78f:24e7
